@@ -1,4 +1,4 @@
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 function joinLines()
     local v = CurView()
@@ -28,7 +28,7 @@ function joinLines()
         selection = c:GetSelection()
     end    
 
-    -- swarp all whitespaces with a single space
+    -- swap all whitespaces with a single space
     local modifiedSelection = string.gsub(selection, "\n%s+", " ")
     -- write modified selection to buffer
     v.Buf:Replace(a, b, modifiedSelection)    
