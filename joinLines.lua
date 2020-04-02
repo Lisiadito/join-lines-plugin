@@ -23,15 +23,19 @@ function joinLines()
         a = startLoc
         b = Loc(xNext, c.Loc.Y+1)
 
-        c:SetSelectionStart(startLoc)
-        c:SetSelectionEnd(b)
-        selection = c:GetSelection()
+		if a.x ~= b.x then 
+        	c:SetSelectionStart(startLoc)
+        	c:SetSelectionEnd(b)
+        	selection = c:GetSelection()
+       	end
     end    
 
-    -- swap all whitespaces with a single space
-    local modifiedSelection = string.gsub(selection, "\n%s*", " ")
-    -- write modified selection to buffer
-    v.Buf:Replace(a, b, modifiedSelection)    
+	if a.x ~= b.x then 
+    	-- swap all whitespaces with a single space
+    	local modifiedSelection = string.gsub(selection, "\n%s*", " ")
+    	-- write modified selection to buffer
+    	v.Buf:Replace(a, b, modifiedSelection)    
+   	end
 end
 
 MakeCommand("joinLines", "joinLines.joinLines")
