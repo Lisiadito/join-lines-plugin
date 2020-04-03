@@ -1,4 +1,4 @@
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 
 function joinLines()
     local v = CurView()
@@ -18,7 +18,9 @@ function joinLines()
         -- get beginning of curent line
         local startLoc = Loc(0, c.Loc.Y)  
         -- get the last position of the next line 
-        local xNext = string.len(v.Buf:Line(c.Loc.Y+1))
+        -- I use the go function because Lua string.len counts bytes which leads
+        -- to wrong results with some unicode characters
+        local xNext = utf8.RuneCountInString(v.Buf:Line(c.Loc.Y+1))
 
         a = startLoc
         b = Loc(xNext, c.Loc.Y+1)
