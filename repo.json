@@ -4,10 +4,10 @@
   "Tags": ["join lines"],
   "Versions": [
     {
-      "Version": "1.0.3",
-      "Url": "https://github.com/Lisiadito/join-lines-plugin/archive/v1.0.3.zip",
+      "Version": "1.1.4",
+      "Url": "https://github.com/Lisiadito/join-lines-plugin/archive/v1.1.4.zip",
       "Require": {
-        "micro": ">=1.1.0"
+        "micro": ">=2.0.4"
       }
     }
   ]
