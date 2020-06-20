@@ -39,7 +39,7 @@ function joinLines(v)
         selection = util.String(selection)
 
         -- swap all whitespaces with a single space
-        local modifiedSelection = string.gsub(selection, "\n%s+", " ")
+        local modifiedSelection = string.gsub(selection, "\n%s*", " ")
         -- write modified selection to buffer
         v.Buf:Replace(a, b, modifiedSelection)
     end
