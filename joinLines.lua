@@ -1,4 +1,4 @@
-VERSION = "1.1.4"
+VERSION = "1.1.5"
 
 local micro = import("micro")
 local config = import("micro/config")
@@ -16,7 +16,7 @@ function joinLines(v)
             a, b = c.CurSelection[1], c.CurSelection[2]
         end
         a = buffer.Loc(a.X, a.Y)
-        b = buffer.Loc(b.X, b.Y)a
+        b = buffer.Loc(b.X, b.Y)
         selection = c:GetSelection()
     else
         -- get beginning of curent line
