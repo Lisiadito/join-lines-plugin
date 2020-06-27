@@ -1,4 +1,4 @@
-VERSION = "1.1.5"
+VERSION = "1.1.6"
 
 local micro = import("micro")
 local config = import("micro/config")
@@ -20,7 +20,8 @@ function joinLines(v)
         selection = c:GetSelection()
     else
         -- get beginning of curent line
-        local startLoc = buffer.Loc(0, c.Loc.Y)  
+        c:StartOfText()
+        local startLoc = buffer.Loc(c.Loc.X, c.Loc.Y)  
         -- get the last position of the next line 
         -- I use the go function because Lua string.len counts bytes which leads
         -- to wrong results with some unicode characters
@@ -28,20 +29,21 @@ function joinLines(v)
 
         a = startLoc
         b = buffer.Loc(xNext, c.Loc.Y+1)
-        if a.x ~= b.x then
-            c:SetSelectionStart(startLoc)
-            c:SetSelectionEnd(b)
-            selection = c:GetSelection()
-        end
+        c:SetSelectionStart(startLoc)
+        c:SetSelectionEnd(b)
+        selection = c:GetSelection()
     end
 
-    if a.x ~= b.x then
-        selection = util.String(selection)
+    selection = util.String(selection)
 
-        -- swap all whitespaces with a single space
-        local modifiedSelection = string.gsub(selection, "\n%s*", " ")
+    -- swap all whitespaces with a single space
+    local modifiedSelection = string.gsub(selection, "%s+", " ")
+
+    if util.CharacterCountInString(selection) > 0 then
         -- write modified selection to buffer
         v.Buf:Replace(a, b, modifiedSelection)
+    else
+        c:ResetSelection()
     end
 end
 
